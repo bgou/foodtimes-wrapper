@@ -1,4 +1,4 @@
-
+import "@babel/polyfill";
 import puppeteer from "puppeteer"
 
 export interface Props {
@@ -27,16 +27,14 @@ export class FormParser {
     }
 
     getMenu(): any {
+        (async () => {
+            const browser = await puppeteer.launch();
+            const page = await browser.newPage();
+            await page.goto("https://google.com");
+            await page.screenshot({ path: "google.png" });
 
-
-// (async () => {
-//     const browser = await puppeteer.launch();
-//     const page = await browser.newPage();
-//     await page.goto("https://example.com");
-//     await page.screenshot({ path: "example.png" });
-
-//     await browser.close();
-// })();
+            await browser.close();
+        })();
     }
 }
 

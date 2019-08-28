@@ -1,7 +1,6 @@
 {
   "name": "foodtimes-wrapper",
   "version": "1.0.0",
-  "main": "lib/index.js",
   "repository": "git@github.com:bgou/foodtimes-wrapper.git",
   "author": "Bruce 🏸 Gou <brucegou@gmail.com>",
   "license": "MIT",
@@ -11,10 +10,10 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-numeric-separator": "^7.2.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-typescript": "^7.3.3",
     "@types/puppeteer": "^1.19.1",
-    "babel-loader": "^8.0.6",
     "fork-ts-checker-webpack-plugin": "^1.5.0",
     "nodemon": "^1.19.1",
     "typescript": "^3.6.2",
@@ -24,11 +23,13 @@
   "scripts": {
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
+    "build": "rm -rf lib/ && npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly",
-    "build:js": "webpack --mode=production",
-    "build": "npm run build:types && npm run build:js"
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+    "start": "npm run build && nodemon lib/index.js"
   },
   "dependencies": {
+    "@babel/runtime": "^7.5.5",
     "puppeteer": "^1.19.0"
   }
 }
