@@ -1,4 +1,4 @@
-import http from 'http';
+import http from "http";
 
 const server = http
   .createServer((req, res) => {
@@ -7,6 +7,4 @@ const server = http
   })
   .listen(3000, "0.0.0.0");
 
-console.log('Server running at http://0.0.0.0:3000/');
-
-export default server;
+console.log("Server running at http://0.0.0.0:3000/");
